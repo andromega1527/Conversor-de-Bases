@@ -65,13 +65,26 @@ def converterDecimalParaBinario(entrada):
 
 	return valorFinal
 
-def converterBinarioParaDecimal(entrada):
+def converterDecimalParaHexadecimal(entrada):
 	pass
+
+def converterBinarioParaDecimal(entrada):
+	entradaString = str(entrada)
+	tamanhoEntrada = len(entradaString)
+	resultadosSeparados = []
+	resultadoTotal = 0
+	contar = 1
+
+	for i in range(tamanhoEntrada):
+		resultadosSeparados.append(int(entradaString[tamanhoEntrada - contar]) * (2 ** i))
+		contar += 1
+
+	for j in range(len(resultadosSeparados)):
+		resultadoTotal += resultadosSeparados[j]
+
+	return resultadoTotal
 
 def converterBinarioParaHexadecimal(entrada):
-	pass
-
-def converterDecimalParaHexadecimal(entrada):
 	pass
 
 def converterHexadecimalParaBinario(entrada):
