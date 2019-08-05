@@ -47,7 +47,7 @@ def converterDecimalParaBinario(entrada):
 	valorFinal = ''
 
 	while contar >= 0:
-		if valoresNovos[contar] / 2 != 1:
+		if int(valoresNovos[contar] / 2) != 1:
 			valoresNovos.append(int(valoresNovos[contar] / 2))
 			valor += classificarBinario(valoresNovos[contar] / 2)
 			contar += 1
@@ -66,8 +66,42 @@ def converterDecimalParaBinario(entrada):
 
 	return valorFinal
 
+def classificarDecimalParaHexadeximal(elementoDaEntrada):
+	matrizHexadecimal = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', '10', '11']
+	resultado = ''
+
+	for i in range(len(matrizHexadecimal)):
+		if elementoDaEntrada == i:
+			resultado = matrizHexadecimal[i]
+			break
+
+	return resultado
+
 def converterDecimalParaHexadecimal(entrada):
-	pass
+	tamanhoEntrada = len(str(entrada))
+	valoresNovos = []
+	valoresNovos.append(entrada)
+	valor = ''
+	valorFinal = ''
+	contar = 0
+
+	while contar >= 0:
+		if valoresNovos[contar] / 16 >= 1:
+			valoresNovos.append(int(valoresNovos[contar] / 16))
+			valor += classificarDecimalParaHexadeximal(valoresNovos[contar] % 16)
+			contar += 1
+
+		else: 
+			valor += classificarDecimalParaHexadeximal(valoresNovos[len(valoresNovos) - 1])
+			break
+
+	contar = 1
+
+	for i in range(len(valor)):
+		valorFinal += valor[len(valor) - contar]
+		contar += 1
+
+	return valorFinal
 
 def converterBinarioParaDecimal(entrada):
 	entradaString = str(entrada)
@@ -91,13 +125,13 @@ def converterBinarioParaHexadecimal(entrada):
 def converterHexadecimalParaBinario(entrada):
 	pass
 
-def classificarHexadecimal(elementoDaEntrada):
-	matrizHexadecimal = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'E', 'F', '10', '11']
+def classificarHexadecimalParaDecimal(elementoDaEntrada):
+	matrizHexadecimal = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', '10', '11']
 	resultado = 0
 
 	for i in range(len(matrizHexadecimal)):
 		if elementoDaEntrada == matrizHexadecimal[i]:
-			resultado = i + 1
+			resultado = i
 
 	return resultado
 
@@ -108,7 +142,7 @@ def converterHexadecimalParaDecimal(entrada):
 	contar = 1
 
 	for i in range(tamanhoEntrada):
-		resultadosSeparados.append(classificarHexadecimal(entrada[tamanhoEntrada - contar]) * (16 ** i))
+		resultadosSeparados.append(classificarHexadecimalParaDecimal(entrada[tamanhoEntrada - contar]) * (16 ** i))
 		contar += 1
 
 	for j in range(len(resultadosSeparados)):
