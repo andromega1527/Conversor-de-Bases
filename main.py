@@ -25,7 +25,8 @@ for i in range(len(entrada)):
 	else:
 		parametro += entrada[i]
 
-valorInt = int(valor)
+if parametro[0] != 'h':
+	valorInt = int(valor)
 
 def classificarBinario(numerador):
 	valor = ''
@@ -90,8 +91,30 @@ def converterBinarioParaHexadecimal(entrada):
 def converterHexadecimalParaBinario(entrada):
 	pass
 
+def classificarHexadecimal(elementoDaEntrada):
+	matrizHexadecimal = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'E', 'F', '10', '11']
+	resultado = 0
+
+	for i in range(len(matrizHexadecimal)):
+		if elementoDaEntrada == matrizHexadecimal[i]:
+			resultado = i + 1
+
+	return resultado
+
 def converterHexadecimalParaDecimal(entrada):
-	pass
+	tamanhoEntrada = len(entrada)
+	resultadosSeparados = []
+	resultadoTotal = 0
+	contar = 1
+
+	for i in range(tamanhoEntrada):
+		resultadosSeparados.append(classificarHexadecimal(entrada[tamanhoEntrada - contar]) * (16 ** i))
+		contar += 1
+
+	for j in range(len(resultadosSeparados)):
+		resultadoTotal += resultadosSeparados[j]
+
+	return resultadoTotal
 
 def avaliarParametro(parametro):
 	resultado = ''
@@ -105,9 +128,9 @@ def avaliarParametro(parametro):
 	elif parametro == 'bin -hex':
 		resultado = converterBinarioParaHexadecimal(valorInt)
 	elif parametro == 'hex -bin':
-		resultado = converterHexadecimalParaBinario(valorInt)
+		resultado = converterHexadecimalParaBinario(valor)
 	elif parametro == 'hex -dec':
-		resultado = converterHexadecimalParaDecimal(valorInt)
+		resultado = converterHexadecimalParaDecimal(valor)
 	else:
 		resultado = 'Você deve ter digitado errado.'
 
