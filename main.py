@@ -120,10 +120,16 @@ def converterBinarioParaDecimal(entrada):
 	return resultadoTotal
 
 def converterBinarioParaHexadecimal(entrada):
-	pass
+	entradaConvertidaEmDecimal = converterBinarioParaDecimal(entrada)
+	entradaConvertidaEmHexadecimal = converterDecimalParaHexadecimal(entradaConvertidaEmDecimal)
+
+	return entradaConvertidaEmHexadecimal
 
 def converterHexadecimalParaBinario(entrada):
-	pass
+	entradaConvertidaEmDecimal = converterHexadecimalParaDecimal(entrada)
+	entradaConvertidaEmBinario = converterDecimalParaBinario(entradaConvertidaEmDecimal)
+
+	return entradaConvertidaEmBinario
 
 def classificarHexadecimalParaDecimal(elementoDaEntrada):
 	matrizHexadecimal = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', '10', '11']
