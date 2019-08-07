@@ -13,6 +13,7 @@ entrada = input('Digite a entrada, e ao lado o tipo que ele é para o que quer c
 valor = ''
 validar = True
 parametro = ''
+decimal = False
 
 for i in range(len(entrada)):
 	if entrada[i] != ' ' and validar != False:
@@ -25,8 +26,14 @@ for i in range(len(entrada)):
 	else:
 		parametro += entrada[i]
 
-if parametro[0] != 'h':
+for i in valor:
+	if i == '.':
+		decimal = True
+
+if parametro[0] != 'h' and decimal == False:
 	valorInt = int(valor)
+else:
+	valorInt = float(valor)
 
 def classificarBinario(numerador):
 	valor = ''
@@ -109,10 +116,28 @@ def converterBinarioParaDecimal(entrada):
 	resultadosSeparados = []
 	resultadoTotal = 0
 	contar = 1
+	pontoPassou = False
+	esquerdaDaVirgula = ''
+	direitaDaVirgula = ''
 
 	for i in range(tamanhoEntrada):
-		resultadosSeparados.append(int(entradaString[tamanhoEntrada - contar]) * (2 ** i))
+		if entradaString[i] != '.' and pontoPassou == False:
+			esquerdaDaVirgula += entradaString[i]
+		elif entradaString[i] == '.':
+			pontoPassou = True
+			continue
+		else:
+			direitaDaVirgula += entradaString[i]
+
+	for i in range(len(esquerdaDaVirgula)):
+		resultadosSeparados.append(int(esquerdaDaVirgula[len(esquerdaDaVirgula) - contar]) * (2 ** i))
 		contar += 1
+
+	for i in range(len(direitaDaVirgula)):
+		if direitaDaVirgula != '':
+			resultadosSeparados.append(float(direitaDaVirgula[i]) * (2 ** (-(i + 1))))
+		else:
+			break
 
 	for j in range(len(resultadosSeparados)):
 		resultadoTotal += resultadosSeparados[j]
